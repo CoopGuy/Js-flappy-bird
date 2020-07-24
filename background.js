@@ -6,14 +6,14 @@ class Background {
   }
 
   scroll(){
-      if(this.scrollLength <= -500){
+      if(this.scrollLength <= -canvas.width){
         this.scrollLength = 0;
       }
       this.scrollLength -= 2;
   }
 
   show(){
-    ctx.drawImage(this.img, this.scrollLength, 0);
-    ctx.drawImage(this.img, this.scrollLength + 500, 0);
+    ctx.drawImage(this.img, this.scrollLength, 0, canvas.width, canvas.height);
+    ctx.drawImage(this.img, this.scrollLength + canvas.width, 0, canvas.width, canvas.height);
   }
 }
