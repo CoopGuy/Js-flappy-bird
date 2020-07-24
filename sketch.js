@@ -1,8 +1,11 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext("2d");
+const heightSegment = window.innerHeight/10;
 
 const background = new Background();
 const bird = new Bird();
+const pipe = new Pipe(window.innerHeight/10 * 9, window.innerHeight/10 * 2);
+
 
 document.addEventListener('resize', (val) => {
   bird.accelleration = .5/315 * window.innerHeight;
@@ -21,6 +24,10 @@ const draw = () => {
 
   bird.update();
   bird.show();
+
+  pipe.update();
+  pipe.show();
+
 }
 
 const interval = setInterval(draw, 17);
