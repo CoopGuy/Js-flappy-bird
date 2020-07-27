@@ -4,8 +4,10 @@ const heightSegment = window.innerHeight/10;
 
 const background = new Background();
 const bird = new Bird();
-const pipe = new Pipe(window.innerHeight/10 * 9, window.innerHeight/10 * 2);
-
+const pipe1 = new Pipe(window.innerHeight/10 * 9, window.innerHeight/10 * 2);
+const pipe2 = new Pipe(window.innerHeight/10 * 9, window.innerHeight/10 * 2, 500);
+const pipe3 = new Pipe(window.innerHeight/10 * 9, window.innerHeight/10 * 2, 1000);
+const pipeArray = [pipe1, pipe2, pipe3];
 
 document.addEventListener('resize', (val) => {
   bird.accelleration = .5/315 * window.innerHeight;
@@ -15,21 +17,32 @@ document.addEventListener('resize', (val) => {
 });
 
 document.addEventListener("keydown", (keycode) => {
-  if(keycode.code == 'Space'){
+  if(keycode.code == 'Space' && bird.alive){
     bird.flap();
   }
 });
 
 const draw = () => {
-  background.scroll();
+  if(bird.alive){
+    background.scroll();
+  }
   background.show();
 
   bird.update();
   bird.show();
 
-  pipe.update();
-  pipe.show();
-
+  pipeArray.forEach((item) => {
+    if (bird.alive){
+      item.update();
+    }
+    item.show();
+    if(item.xLocation <= -100){
+      item.reset();
+    }
+    if(bird.alive){
+      bird.alive = item.checkCollission(bird);
+    }
+  });
 }
 
 const interval = setInterval(draw, 17);

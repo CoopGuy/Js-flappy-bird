@@ -6,6 +6,7 @@ class Bird {
     this.orientation = 90;
     this.accelleration = .5/315 * window.innerHeight;
     this.flapStrength = -8/315 * window.innerHeight;
+    this.alive = true;
     // this.img = new Image();
     // this.img.src = 'bird.png';
   }
@@ -15,13 +16,19 @@ class Bird {
   }
 
   update(){
-    if(this.yLocation > canvas.height){
-      this.velocity = this.velocity * -1;
+    if(this.alive){
+      if(this.yLocation > canvas.height){
+        this.alive = false;
+      }
+      else{
+        this.velocity += this.accelleration;
+      }
     }
-    else{
+    else if(this.yLocation < canvas.height){
       this.velocity += this.accelleration;
     }
-      this.yLocation += this.velocity;
+    else(this.velocity = 0);
+    this.yLocation += this.velocity;
   }
 
   flap(){
