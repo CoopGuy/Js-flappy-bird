@@ -10,6 +10,8 @@ const pipe = new Pipe(window.innerHeight/10 * 9, window.innerHeight/10 * 2);
 document.addEventListener('resize', (val) => {
   bird.accelleration = .5/315 * window.innerHeight;
   bird.flapStrength = -8/315 * window.innerHeight;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 });
 
 document.addEventListener("keydown", (keycode) => {
