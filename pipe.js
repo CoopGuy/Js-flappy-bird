@@ -11,14 +11,20 @@ class Pipe {
     else{
       this.xLocation = window.innerWidth/10 * 11;
     }
+
+    this.topimg = new Image();
+    this.bottomimg = new Image();
+    this.bottomimg.src = 'FlippedPipe.png';
+    this.topimg.src = 'Pipe.png';
+    this.wi = window.innerWidth/100 * 1.5;
   }
 
   show(){
-    ctx.fillRect(this.xLocation - 5, this.holeHeight - 5, 10, 10);
-    ctx.fillStyle = 'rgb(100,0,0)';
-    ctx.fillRect(this.xLocation - 5, this.topHeight - 5, 10, 10);
-    ctx.fillRect(this.xLocation - 5, this.bottomHeight - 5, 10, 10);
-    ctx.fillStyle = 'rgb(0)';
+    ctx.translate(-189, 0);
+    ctx.drawImage(this.topimg, this.xLocation - 5, this.topHeight - 5);
+    ctx.translate(0, -506)
+    ctx.drawImage(this.bottomimg, this.xLocation - 5, this.bottomHeight - 5);
+    ctx.translate(189, 506);
   }
 
   update(){
@@ -26,7 +32,7 @@ class Pipe {
   }
 
   checkCollission(birdObj){
-    if(Math.abs(birdObj.xLocation - this.xLocation) < 10){
+    if(Math.abs(birdObj.xLocation - this.xLocation) < this.topimg.width*.22){
       if(birdObj.yLocation > this.bottomHeight && birdObj.yLocation < this.topHeight){
         return true;
       }
@@ -41,6 +47,6 @@ class Pipe {
     this.holeHeight = Math.floor(Math.random() * (this.max - this.min) + this.min);
     this.topHeight = this.holeHeight + heightSegment*1.3;
     this.bottomHeight = this.holeHeight - heightSegment*1.3;
-    this.xLocation += window.innerWidth + 100;
+    this.xLocation += window.innerWidth;
   }
 }
