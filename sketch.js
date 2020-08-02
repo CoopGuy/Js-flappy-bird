@@ -4,9 +4,10 @@ const heightSegment = window.innerHeight/10;
 
 const background = new Background();
 const bird = new Bird();
-const pipe1 = new Pipe(window.innerHeight/10 * 9, window.innerHeight/10 * 2);
-const pipe2 = new Pipe(window.innerHeight/10 * 9, window.innerHeight/10 * 2, 500);
-const pipe3 = new Pipe(window.innerHeight/10 * 9, window.innerHeight/10 * 2, 1000);
+const pipe1 = new Pipe(window.innerHeight/10 * 9 - heightSegment*1.5, window.innerHeight/10 * 2 + heightSegment*1.5);
+const pipe2 = new Pipe(window.innerHeight/10 * 9 - heightSegment*1.5, window.innerHeight/10 * 2 + heightSegment*1.5, window.innerWidth/3);
+const pipe3 = new Pipe(window.innerHeight/10 * 9 - heightSegment*1.5, window.innerHeight/10 * 2 + heightSegment*1.5, window.innerWidth* (2/3));
+const pipe4 = new Pipe(window.innerHeight/10 * 9 - heightSegment*1.5, window.innerHeight/10 * 2 + heightSegment*1.5, window.innerWidth);
 const pipeArray = [pipe1, pipe2, pipe3];
 
 document.addEventListener('resize', (val) => {
@@ -28,9 +29,6 @@ const draw = () => {
   }
   background.show();
 
-  bird.update();
-  bird.show();
-
   pipeArray.forEach((item) => {
     if (bird.alive){
       item.update();
@@ -43,6 +41,9 @@ const draw = () => {
       bird.alive = item.checkCollission(bird);
     }
   });
+
+  bird.update();
+  bird.show();
 }
 
 const interval = setInterval(draw, 17);

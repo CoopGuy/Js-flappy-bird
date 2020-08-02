@@ -7,12 +7,13 @@ class Bird {
     this.accelleration = .5/315 * window.innerHeight;
     this.flapStrength = -8/315 * window.innerHeight;
     this.alive = true;
-    // this.img = new Image();
-    // this.img.src = 'bird.png';
+    this.img = new Image();
+    this.img.src = 'FlappyBird.png';
+    this.wi = window.innerWidth/100 * 1.5;
   }
 
   show(){
-    ctx.fillRect(this.xLocation - 5, this.yLocation - 5, 10, 10);
+    ctx.drawImage(this.img, this.xLocation - this.wi, this.yLocation - this.wi, this.wi*2, this.wi*2);
   }
 
   update(){
